@@ -33,6 +33,7 @@ export const paymentInfo = Object
 export const items = config.paymentItems.map((it, i) => {
   return {
     ...it,
+    total: it.unitPrice * it.businessDays * 8 * it.quantity - (10 - invoiceNumber % 10)/100,
     title: format(it.title,
       { invoiceRange: DateRange({ startDate, endDate }) }),
   }

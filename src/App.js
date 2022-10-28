@@ -54,8 +54,8 @@ class App extends Component {
               <td>#</td>
               <td>Item description</td>
               <td width="10%">Price</td>
-              <td width="12%">Quantity</td>
-              <td width="15%">Subtotal</td>
+              {/* <td width="12%">Quantity</td> */}
+              {/* <td width="15%">Subtotal</td> */}
             </tr>
             </thead>
             <tbody>
@@ -64,17 +64,17 @@ class App extends Component {
                 <tr>
                   <td>{i + 1}</td>
                   <td>{it.title}</td>
-                  <td>{money(it.unitPrice)}</td>
-                  <td>{it.quantity}</td>
-                  <td>{money(it.unitPrice * it.quantity)}</td>
+                  <td>{money(it.total)}</td>
+                  {/* <td>{it.quantity}</td> */}
+                  {/* <td>{money(it.total)}</td> */}
                 </tr>
               )
             }
             </tbody>
             <tfoot>
             <tr>
-              <td colSpan={4}>Total</td>
-              <td>{money(items.reduce((acc, curr) => acc + (curr.unitPrice * curr.quantity), 0))}</td>
+              <td colSpan={2}>Total</td>
+              <td>{money(items.reduce((acc, curr) => acc + (curr.total), 0))}</td>
             </tr>
             </tfoot>
           </table>
