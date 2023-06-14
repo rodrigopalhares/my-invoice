@@ -28,7 +28,7 @@ class App extends Component {
           <title>{`Invoice #${invoiceNumber}`}</title>
         </Helmet>
         <div className="header">
-          <img src={companyLogo} className="logo"/>
+          <img src={companyLogo} alt="logo" className="logo"/>
           <div className="row">
             <div>
               <div>

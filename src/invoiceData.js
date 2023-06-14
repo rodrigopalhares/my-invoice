@@ -1,6 +1,5 @@
 import DateRange from './DateRange'
 import _logo from './logo.svg'
-import React from 'react'
 import { getEndDate, getInvoiceNumber, getStartDate } from './utils'
 import format from 'string-template'
 import config from './config'
