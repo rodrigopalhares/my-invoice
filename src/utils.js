@@ -1,7 +1,14 @@
-import { addDays, addWeeks, differenceInWeeks } from 'date-fns'
+import { addDays, addWeeks, differenceInWeeks, isFirstDayOfMonth, setDate, lastDayOfMonth } from 'date-fns'
 
-export function getEndDate({ firstInvoiceDate, invoiceDate, invoiceWeeksInterval }) {
+export function getEndDateOld({ firstInvoiceDate, invoiceDate, invoiceWeeksInterval }) {
   return addWeeks(firstInvoiceDate, Math.round(differenceInWeeks(invoiceDate, firstInvoiceDate) / invoiceWeeksInterval) * invoiceWeeksInterval)
+}
+
+export function getEndDate({ startDate }) {
+  if (isFirstDayOfMonth(startDate))
+    return setDate(startDate, 15)
+  else 
+    return lastDayOfMonth(startDate)
 }
 
 export function getStartDate({ invoiceWeeksInterval, endDate }) {

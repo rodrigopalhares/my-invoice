@@ -1,6 +1,6 @@
 import DateRange from './DateRange'
 import _logo from './logo.svg'
-import { getEndDate, getInvoiceNumber, getStartDate } from './utils'
+import { getEndDate, getInvoiceNumber } from './utils'
 import format from 'string-template'
 import config from './config'
 
@@ -10,12 +10,8 @@ export const myCompanyName = config.myCompanyName
 export const firstInvoiceDate = config.firstInvoiceDate
 export const invoiceDate = config.invoiceDate || new Date()
 export const invoiceWeeksInterval = parseInt(config.invoiceWeeksInterval, 10)
-export const endDate = getEndDate({
-  firstInvoiceDate,
-  invoiceDate,
-  invoiceWeeksInterval,
-})
-export const startDate = getStartDate({ invoiceWeeksInterval, endDate })
+export const startDate = config.startDate
+export const endDate = getEndDate({startDate})
 export const invoiceNumber = config.invoiceNumber || getInvoiceNumber({
   endDate,
   firstInvoiceDate,
@@ -32,8 +28,7 @@ export const paymentInfo = Object
 export const items = config.paymentItems.map((it, i) => {
   return {
     ...it,
-    total: it.unitPrice * it.businessDays * 8 * it.quantity - (10 - invoiceNumber % 10)/100,
-    title: format(it.title,
-      { invoiceRange: DateRange({ startDate, endDate }) }),
+    total: it.total || (it.unitPrice * it.businessDays * 8 * it.quantity - (10 - invoiceNumber % 10)/100),
+    title: format(it.title, { invoiceRange: DateRange({ startDate, endDate }) }),
   }
 })
